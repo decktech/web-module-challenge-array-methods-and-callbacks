@@ -35,7 +35,7 @@ function getFinals(arr) {
     })
     return allFinals;
 }
-console.log(getFinals(fifaData))
+//console.log(getFinals(fifaData))
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -107,7 +107,7 @@ function getAverageGoals(cb) {
     return avgTotalGoal.toFixed(2);
  }
 
- console.log(newCB)
+//console.log(newCB)
 //console.log(getAverageGoals(newCB));
 //console.log(newCB.map(item => item['Home Team Goals']))
 /// 🥅 STRETCH 🥅 ///
@@ -118,12 +118,27 @@ Create a function called `getCountryWins` that takes the parameters `data` and `
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
-
-    /* code here */
-
+function getCountryWins(data, teamInitials) {
+    const winningInitials = [];
+    for (let i = 0; i < data.length; i++) {
+    if(data[i]['Home Team Goals'] > data[i]['Away Team Goals']) {
+        winningInitials.push(data[i]['Home Team Initials']);
+    } else if (data[i]['Home Team Goals'] < data[i]['Away Team Goals']) {
+        winningInitials.push(data[i]['Away Team Initials']);
+    }
+}
+const totalWins = winningInitials.filter(team => team === teamInitials);
+const totalWinsNumber = totalWins.length;
+return totalWinsNumber;
 }
 
+console.log(getCountryWins(newCB, 'ITA'))
+// let testArr = ['GER', 'GER', 'GER', 'ITL', 'GER']
+// let test = testArr.filter(team => team === 'GER')
+// console.log(test)
+// console.log(test.reduce((previousValue, currentValue) => previousValue + currentValue,
+// 'GER'
+// ))
 
 
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 
