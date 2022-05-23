@@ -160,16 +160,27 @@ function getGoals(data) {
         totalGoalsObj[`${newArr[i][0]}`] += newArr[i][1];
     }
     const totalGamesObj = Object.fromEntries(newArr);
-    Object.keys(totalGoalsObj).forEach(value => {
-        totalGoalsObj[value] = 0;
+    Object.keys(totalGamesObj).forEach(value => {
+        totalGamesObj[value] = 0;
     })
     for (let i = 0; i < newArr.length; i++) {
         totalGamesObj[`${newArr[i][0]}`] += 1;
     }
-    const finalObj = {};
-    
-    console.log(data.length)
-    return totalGamesObj;
+    const finalObj = Object.fromEntries(newArr);
+    Object.keys(finalObj).forEach(value => {
+        finalObj[value] = 0;
+    })
+    for (let property in finalObj) {
+        finalObj[property] = totalGoalsObj[property] / totalGamesObj[property];
+    }
+    const getMax = obj => {
+        return Object.keys(obj).filter(x => {
+             return obj[x] == Math.max.apply(null, 
+             Object.values(obj));
+       });
+    };
+    console.log(finalObj)
+    return getMax(finalObj);
 }
 
 console.log(getGoals(newCB))
