@@ -132,7 +132,7 @@ const totalWinsNumber = totalWins.length;
 return totalWinsNumber;
 }
 
-console.log(getCountryWins(newCB, 'ITA'))
+//console.log(getCountryWins(newCB, 'ITA'))
 // let testArr = ['GER', 'GER', 'GER', 'ITL', 'GER']
 // let test = testArr.filter(team => team === 'GER')
 // console.log(test)
@@ -144,13 +144,36 @@ console.log(getCountryWins(newCB, 'ITA'))
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 
 Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(/* code here */) {
-
-    /* code here */
-
+function getGoals(data) { 
+    const newArr = [];
+    for (let i = 0; i < data.length; i++) {
+        if(data[i]['Home Team Goals'] > 0 || data[i]['Home Team Goals'] > 0) {
+            newArr.push([`${data[i][`Home Team Name`]}`, data[i]['Home Team Goals']]);
+            newArr.push([`${data[i][`Away Team Name`]}`, data[i]['Away Team Goals']])
+        }  
+    }
+    const totalGoalsObj = Object.fromEntries(newArr);
+    Object.keys(totalGoalsObj).forEach(value => {
+        totalGoalsObj[value] = 0;
+    })
+    for (let i = 0; i < newArr.length; i++) {
+        totalGoalsObj[`${newArr[i][0]}`] += newArr[i][1];
+    }
+    const totalGamesObj = Object.fromEntries(newArr);
+    Object.keys(totalGoalsObj).forEach(value => {
+        totalGoalsObj[value] = 0;
+    })
+    for (let i = 0; i < newArr.length; i++) {
+        totalGamesObj[`${newArr[i][0]}`] += 1;
+    }
+    const finalObj = {};
+    
+    console.log(data.length)
+    return totalGamesObj;
 }
 
-
+console.log(getGoals(newCB))
+//console.log(newCB)
 /* 💪💪💪💪💪 Stretch 3: 💪💪💪💪💪
 Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */
 
