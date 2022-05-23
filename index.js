@@ -147,10 +147,13 @@ Write a function called getGoals() that accepts a parameter `data` and returns t
 function getGoals(data) { 
     const newArr = [];
     for (let i = 0; i < data.length; i++) {
-        if(data[i]['Home Team Goals'] > 0 || data[i]['Home Team Goals'] > 0) {
+        if(data[i]['Home Team Goals'] > 0 || data[i]['Away Team Goals'] > 0) {
             newArr.push([`${data[i][`Home Team Name`]}`, data[i]['Home Team Goals']]);
-            newArr.push([`${data[i][`Away Team Name`]}`, data[i]['Away Team Goals']])
-        }  
+            newArr.push([`${data[i][`Away Team Name`]}`, data[i]['Away Team Goals']]);
+        } else if (data[i]['Home Team Goals'] === 0 || data[i]['Away Team Goals'] === 0) {
+            newArr.push([`${data[i][`Home Team Name`]}`, data[i]['Home Team Goals']]);
+            newArr.push([`${data[i][`Away Team Name`]}`, data[i]['Away Team Goals']]);
+        } 
     }
     const totalGoalsObj = Object.fromEntries(newArr);
     Object.keys(totalGoalsObj).forEach(value => {
@@ -181,6 +184,8 @@ function getGoals(data) {
     };
     console.log(finalObj)
     return getMax(finalObj);
+    // console.log(newCB.length)
+    // return newArr.length
 }
 
 console.log(getGoals(newCB))
